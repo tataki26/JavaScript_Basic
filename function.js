@@ -83,3 +83,58 @@ const errResult = showError();
 console.log(errResult);
 
 // 함수는 한 번에 한 작업에만 집중하도록 정의할 것
+
+//
+// 함수 표현식
+//
+
+/*
+// 함수 선언문
+// 어디서든 호출 가능
+// 호이스팅(hoisting)
+// 인터프리터 언어는 순차 실행
+// 그러나 함수의 경우, 코드 실행 전 초기화 단계에서 선언된 함수를 모두 찾아 생성하므로 순서와 상관 없이 실행됨
+sayHi(); // not error
+
+function sayHi(){
+    console.log('Hi');
+}
+*/
+
+// 함수 표현식
+// 이름 없는 함수를 정의한 후, 변수에 할당
+// 코드에 도달하면 생성
+// 생성이 된 후에야 실행 가능
+// sayHi(); // error
+let sayHi = function(){
+    console.log('Hi');
+}
+
+sayHi(); // Hi
+
+//
+// 화살표 함수
+//
+
+// 1. 함수명 -> 변수
+// 2. function 생략
+// 3. 화살표로 실행문 가리킴
+// 실행부가 return문 한 줄이거나 매개변수가 하나면 중괄호 생략 가능
+let add = (num1, num2) => num1 + num2;
+
+/*
+// 같은 코드
+function add(num1, num2){
+    return num1 + num2;
+};
+*/
+
+// 매개변수가 없는 함수라도 괄호는 생략할 수 없음
+let showError = () => console.log('error!');
+
+/*
+// 같은 코드
+let showError = function(){
+    console.log('error!');
+};
+*/
