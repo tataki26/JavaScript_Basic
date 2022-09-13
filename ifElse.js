@@ -69,3 +69,43 @@ if(gender === "female" && name2 === "Mike" || isAdult){
 // 첫 조건의 결과가 false지만 마지막 조건의 결과가 true이므로 true
 // 의도한대로 하려면 or 조건문 먼저 실행
 // if(gender === "female" && (name2 === "Mike" || isAdult))
+
+//
+// switch
+//
+
+// case가 다양할 경우, if문보다 더 효율적
+
+/*
+사과: 100원
+바나나: 200원
+키위: 300원
+멜론: 400원
+복숭아: 500원
+수박: 500원
+*/
+
+// 사고 싶은 과일 물어보고 가격 알려주기
+
+let fruit = prompt('어떤 과일을 사고 싶나요?');
+
+switch(fruit){
+    case '사과' :
+        console.log('100원입니다.');
+        break; // break이 없으면 true 조건문 아래의 모든 내용이 같이 실행됨
+    case '바나나' :
+        console.log('200원입니다.');
+        break;
+    case '키위' :
+        console.log('300원입니다.');
+        break;
+    case '멜론' :
+        console.log('400원입니다.');
+        break;
+    case '복숭아' :
+    case '수박' : // 실행 결과가 같을 때
+        console.log('500원입니다.');
+        break;
+    default: // else
+        console.log('없는 과일입니다.');
+}
