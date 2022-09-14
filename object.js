@@ -214,3 +214,125 @@ woman.sayThis();
 
 // 화살표 함수로 바꾸면 window 객체 반환
 // 따라서, 메서드는 화살표 함수로 작성하지 않는 것을 권장
+
+//
+// computed property
+//
+
+let a = 'age';
+
+const user = {
+    name: 'Mike',
+    [a]: 30, // 변수 a에 할당되는 값
+    // 같은 코드
+    // age: 30,
+    [1+4]: 5,
+    ["안녕"+"하세요"]: "Hello",
+};
+
+// 결과
+// user
+// { ... 5: 5, 안녕하세요: "Hello" }
+
+let nm = "name";
+let ag = "age";
+
+const someone = {
+    [nm]: 'Tom',
+    [ag]: 24,
+};
+
+// 사용 예시
+function makeObj(key, val){
+    return {
+        [key]: val,
+    }
+};
+
+const obj = makeObj("나이", 33);
+
+console.log(obj);
+
+//
+// methods - intermediate
+//
+
+// 객체 복제
+const male = {
+    name: 'Mike',
+    age: 30,
+};
+
+// male에는 객체가 아닌 객체가 담긴 메모리 주소를 가지고 있다
+// cloneMale의 프로퍼티를 바꾸면 male의 프로퍼티도 바뀜
+// const cloneMale = male; [X]
+
+// assign(초기값, 복제할 객체)
+const newMale = Object.assign({}, male);
+// {} + { name: 'Mike', age: 30 }
+// { name: 'Tom' } -> key가 같은 경우, 기존 key로 유지('Mike')
+// male != newMale
+// newMale의 프로퍼티를 바꿔도 male의 프로퍼티는 그대로 유지됨
+
+// 세 객체 하나로 합치기
+const seller = {
+    name: 'James',
+};
+
+const info1 = {
+    age: 30,
+};
+
+const info2 = {
+    gender: 'male',
+};
+
+// info2가 info1을 복제하고, 복제된 info1이 seller를 복제
+Object.assign(seller, info1, info2);
+
+// 결과
+/*
+{
+    name: 'James',
+    age: 30,
+    gender: 'male',
+}
+*/
+
+
+// 키 배열 반환
+Object.keys(seller); // ["name", "age", "gender"]
+
+// 값 배열 반환
+Object.values(seller); // ["James', 30, "male"]
+
+// 키/값 배열 반환
+Object.entries(seller);
+
+// 결과
+/*
+[
+    ["name", "Mike"],
+    ["age", 30],
+    ["gender", "male"]
+]
+*/
+
+// 키/값 배열을 객체로
+const arr =
+[
+    ["name", "Mike"],
+    ["age", 30],
+    ["gender", "male"]
+];
+
+Object.fromEntries(arr);
+
+// 결과
+/*
+{
+    name: 'Mike',
+    age: 30,
+    gender: 'male',
+}
+*/
