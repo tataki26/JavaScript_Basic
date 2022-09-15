@@ -182,3 +182,102 @@ const rstArr = userArr.split(","); // ["Mike","Jane","Tom","Tony"]
 // 배열인지 확인
 // typeof를 사용할 경우, object로 나옴
 Array.isArray(arr); // true
+
+//
+// 배열 method3
+//
+
+// 배열 재정렬
+// 배열 자체가 변경되니 주의
+let someArr = [1,3,5,4,2]
+someArr.sort(); // [1,2,3,4,5]
+
+// 알파벳도 정렬 가능
+// 정렬은 문자열을 활용
+// 따라서, 두 자리수부터는 의도한대로 값을 정렬하지 않음
+let strange = [27,8,5,13];
+// strange.sort(); // [13,27,5,8]
+
+// 인자로 정렬 로직을 담은 함수를 받음
+/*
+function fn(a,b) {
+    return a-b;
+};
+
+strange.sort(fn); // [3,8,15,27]
+*/
+// 같은 코드
+// 두 요소를 비교하여 양수인지, 음수인지, 0인지 판단
+// 음수가 나오면 a를 앞으로 보냄
+strange.sort((a,b) => {
+    return a - b;
+});
+
+// 1. 8 27 >> 8,27,5,13 (음수)
+// 2. 5 8 >> 5,8,27,13 (음수)
+// 3. 13 5 >> 5,8,27,13
+// 4. 13 8 >> 5,8,27,13
+// 5. 13 27 >> 5,8,13,27 (음수)
+
+// Lodash 라이브러리
+// 의도한대로 정렬하기
+let newNums = _.sortBy([2,3,1], function(num) {
+    return num;
+}); // [1,2,3]
+
+// 배열을 돌면서 원하는 작업을 하고 최종값 반환
+// 인자로 함수를 받음
+// 배열의 모든 수 합치기 
+/*
+// forEach
+let sumRst = 0;
+
+arry.forEach(num => {
+    sumRst += num;
+}); // 15
+*/
+// 같은 코드
+const numSum = arry.reduce((prev, cur) => {
+    return prev + cur; // 이전 값(누적된 계산 값)과 현재 값 더하기
+}, 0); // 초기값 설정 - 지정하지 않을 경우 첫번째 인덱스의 값이 들어감
+
+//
+// 사용 예시
+//
+let people = [
+    { name: 'Mike', age: 30 },
+    { name: 'Jane', age: 10 },
+    { name: 'Tom', age: 27 },
+    { name: 'Sue', age: 26 },
+    { name: 'Harry', age: 3 },
+    { name: 'Steve', age: 60 },
+];
+
+// 성인 배열 만들기
+let peopleRst = people.reduce((prev, cur)=>{
+    if(cur.age > 19){
+        prev.push(cur.name);
+    }
+    return prev; // 지금까지 만들었던 배열 반환
+}, {}); // 빈 객체에 성인만 추가
+
+// 결과
+// ["Mike", "Jane", "Sue", "Steve"]
+
+// 나이 더하기
+let ageSum = people.reduce((prev, cur) => {
+    return prev += cur.age;
+}, 0); // 196
+
+// 이름이 세 글자인 사람 배열 만들기
+let threeName = people.reduce((prev, cur) => {
+    if(cur.name.length === 3){
+        prev.push(cur.name);
+    }
+    return prev;
+}, {});
+
+// 결과
+// ["Tom", "Sue"]
+
+// reduceRight(): 기능은 동일하되, 배열 우측부터 연산 진행
